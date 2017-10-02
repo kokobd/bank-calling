@@ -7,13 +7,17 @@ namespace App {
 BankRunner::BankRunner() = default;
 
 void BankRunner::start() {
+    using Zelinf::BankCalling::Service::Bank;
+
     if (state.load() != RunnerState::STOPPED) {
         return;
     }
 
-    bank = std::make_shared<Bank>({L"A", L"B", L"C", L"D", L"E"});
+    bank = std::make_shared<Bank>(
+            std::initializer_list<std::wstring>({L"A", L"B", L"C", L"D", L"E"})
+    );
 
-    workerTh = std::make_shared([&cycleTime, &state, bank]() {
+    workerTh = std::make_shared<std::thread>([this]() {
         while (state.load() != RunnerState::STOPPED) {
             if (state.load() == RunnerState::RUNNING) {
                 std::lock_guard<std::recursive_mutex> guard(bank->getLock());

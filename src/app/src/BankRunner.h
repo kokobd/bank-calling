@@ -11,7 +11,6 @@ namespace BankCalling {
 namespace App {
 
 class BankRunner {
-    using Zelinf::BankCalling::Service::Bank;
 public:
     BankRunner();
 
@@ -22,7 +21,7 @@ public:
      * happen.
      * @return A shared_ptr to the bank model.
      */
-    std::shared_ptr<Bank> getBank() { return bank; }
+    std::shared_ptr<Zelinf::BankCalling::Service::Bank> getBank() { return bank; }
 
     /**
      * Create another thread to simulate a bank-calling system.
@@ -44,9 +43,14 @@ public:
      * Resume the paused thread.
      */
     void resume();
+    
+private:
+    enum class RunnerState {
+        RUNNING, PAUSED, STOPPED
+    };
 
 private:
-    std::shared_ptr<Bank> bank;
+    std::shared_ptr<Zelinf::BankCalling::Service::Bank> bank;
 
     // cycle time in milliseconds
     std::atomic<int32_t> cycleTime;
@@ -55,10 +59,6 @@ private:
 
     std::shared_ptr<std::thread> workerTh;
 
-private:
-    enum class RunnerState {
-        RUNNING, PAUSED, STOPPED
-    };
 };
 
 }

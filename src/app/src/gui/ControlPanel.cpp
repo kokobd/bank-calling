@@ -10,8 +10,8 @@ namespace Zelinf {
 namespace BankCalling {
 namespace App {
 
-ControlPanel::ControlPanel(wxWindow *parent)
-        : wxPanel(parent) {
+ControlPanel::ControlPanel(wxWindow *parent, BankRunner &bankRunner)
+        : wxPanel(parent), bankRunner(bankRunner) {
     paintUI();
     registerControllers();
 }

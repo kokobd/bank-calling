@@ -32,8 +32,6 @@ public:
 private:
     void createMenus();
 
-    std::shared_ptr<Zelinf::BankCalling::Service::Bank> bank;
-
     BankRunner bankRunner;
 };
 

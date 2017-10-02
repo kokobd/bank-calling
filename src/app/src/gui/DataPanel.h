@@ -16,14 +16,14 @@ namespace Zelinf {
 namespace BankCalling {
 namespace App {
 
+class BankRunner;
 
 class DataPanel : public wxPanel {
 private:
-    std::shared_ptr<Bank> bank;
+    BankRunner& bankRunner;
 public:
-    using Zelinf::BankCalling::Service::Bank;
 
-    explicit DataPanel(wxWindow *parent, std::shared_ptr<Bank> bank);
+    explicit DataPanel(wxWindow *parent, BankRunner& bankRunner);
 
 private:
     wxGrid *windowInfo;

@@ -8,13 +8,14 @@ namespace Zelinf {
 namespace BankCalling {
 namespace App {
 
-MainFrame::MainFrame() : wxFrame(nullptr, wxID_ANY, wxT("银行叫号模拟系统")) {
+MainFrame::MainFrame() : wxFrame(nullptr, wxID_ANY, wxT("银行叫号模拟系统"), wxDefaultPosition,
+                                 wxSize(800, 600)) {
     createMenus();
     SetBackgroundColour(wxColor("#39393A"));
 
     auto *sizer = new wxBoxSizer(wxHORIZONTAL);
-    dataPanel = new DataPanel(this, bank);
-    controlPanel = new ControlPanel(this);
+    dataPanel = new DataPanel(this, bankRunner);
+    controlPanel = new ControlPanel(this, bankRunner);
     sizer->Add(dataPanel, wxSizerFlags().Expand().Proportion(1).Border(wxALL, 5));
     sizer->Add(controlPanel, wxSizerFlags().Expand().Proportion(1).Border(wxALL, 5));
     SetSizer(sizer);

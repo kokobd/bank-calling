@@ -10,9 +10,11 @@ namespace Zelinf {
 namespace BankCalling {
 namespace App {
 
+class BankRunner;
+
 class ControlPanel : public wxPanel {
 public:
-    explicit ControlPanel(wxWindow *parent);
+    explicit ControlPanel(wxWindow *parent, BankRunner &bankRunner);
 
 private:
     wxButton *btnUpdateParams;
@@ -28,6 +30,9 @@ private:
     void registerControllers();
 
     void paintUI();
+
+private:
+    BankRunner &bankRunner;
 
 };
 

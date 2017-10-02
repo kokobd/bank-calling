@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(wxWidgets_ROOT_DIR libs/wxWidgets-3.0.3)
 set(wxWidgets_CONFIGURATION mswu)
 find_package(wxWidgets REQUIRED
-        COMPONENTS core base)
+        COMPONENTS core base adv)
 include(${wxWidgets_USE_FILE})
 
 add_subdirectory(libs/catch)
