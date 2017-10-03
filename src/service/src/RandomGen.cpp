@@ -7,8 +7,8 @@ namespace BankCalling {
 namespace Service {
 
 
-RandomGen::RandomGen(double mean, double stddev)
-        : normal_dist(mean, stddev) {}
+RandomGen::RandomGen(double mean, double stddev) : normal_dist(mean, stddev) {
+}
 
 int32_t RandomGen::next() {
     return static_cast<int32_t>(
@@ -17,7 +17,7 @@ int32_t RandomGen::next() {
 }
 
 void RandomGen::set(double mean, double stddev) {
-    normal_dist = std::normal_distribution<>(mean, stddev);
+    normal_dist.param(std::normal_distribution<>::param_type(mean, stddev));
 }
 
 }

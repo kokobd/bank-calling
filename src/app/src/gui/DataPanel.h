@@ -20,10 +20,10 @@ class BankRunner;
 
 class DataPanel : public wxPanel {
 private:
-    BankRunner& bankRunner;
+    BankRunner &bankRunner;
 public:
 
-    explicit DataPanel(wxWindow *parent, BankRunner& bankRunner);
+    explicit DataPanel(wxWindow *parent, BankRunner &bankRunner);
 
 private:
     wxGrid *windowInfo;
@@ -37,12 +37,14 @@ private:
 
     void updateQueueInfo();
 
+    void onUpdateInfo(wxCommandEvent &);
+
 public:
     /**
      * Update information from the provided std::shared_ptr<Bank>.
      * Bank will be locked while reading information.
      */
-    void updateInfos();
+    void updateInfo();
 };
 
 }

@@ -2,6 +2,7 @@
 #include <bank-calling/service/Bank.h>
 #include <wx/sizer.h>
 #include "../BankRunner.h"
+#include "InfoUpdateEvent.h"
 
 namespace Zelinf {
 namespace BankCalling {
@@ -16,6 +17,8 @@ DataPanel::DataPanel(wxWindow *parent, BankRunner &bankRunner)
     sizer->Add(windowInfo, wxSizerFlags().Border(wxTOP, 10));
     sizer->Add(queueInfo, wxSizerFlags().Border(wxTOP, 20));
     SetSizer(sizer);
+
+//    Bind(InfoUpdateEvent, &DataPanel::onUpdateInfo, this, GetId());
 }
 
 void DataPanel::initWindowInfo() {
@@ -66,16 +69,17 @@ void DataPanel::updateWindowInfo() {
         windowInfo->SetCellValue(j, 0, p.first);
 
         const Window &window = p.second;
-        windowInfo->SetCellValue(j, 1, std::to_string(window.getCurrentCustomer()->getId()));
-        windowInfo->SetCellValue(j, 2, std::to_string(window.getLeftTime()));
-        windowInfo->SetCellValue(j, 3, std::to_string(window.getNumOfServed()));
+        if (window.getCurrentCustomer() != nullptr) {
+            windowInfo->SetCellValue(j, 1, std::to_string(window.getCurrentCustomer()->getId()));
+            windowInfo->SetCellValue(j, 2, std::to_string(window.getLeftTime()));
+            windowInfo->SetCellValue(j, 3, std::to_string(window.getNumOfServed()));
 
-        windowInfo->SetReadOnly(j, 0);
-        windowInfo->SetReadOnly(j, 1);
-        windowInfo->SetReadOnly(j, 2);
-        windowInfo->SetReadOnly(j, 3);
-
-        ++j;
+            windowInfo->SetReadOnly(j, 0);
+            windowInfo->SetReadOnly(j, 1);
+            windowInfo->SetReadOnly(j, 2);
+            windowInfo->SetReadOnly(j, 3);
+            ++j;
+        }
     }
 }
 
@@ -103,11 +107,15 @@ void DataPanel::updateQueueInfo() {
     }
 }
 
-void DataPanel::updateInfos() {
+void DataPanel::updateInfo() {
     std::lock_guard<std::recursive_mutex> guard(bankRunner.getBank()->getLock());
 
     updateWindowInfo();
     updateQueueInfo();
+}
+
+void DataPanel::onUpdateInfo(wxCommandEvent &event) {
+    updateInfo();
 }
 
 }
