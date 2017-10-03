@@ -34,6 +34,13 @@ private:
 private:
     BankRunner &bankRunner;
 
+    void onUpdateParams(wxCommandEvent &);
+
+    void onStartStop(wxCommandEvent &);
+
+    void onPauseResume(wxCommandEvent &);
+
+    void onSlide(wxCommandEvent &);
 };
 
 }

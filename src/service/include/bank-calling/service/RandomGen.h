@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <random>
+#include <memory>
 
 namespace Zelinf {
 namespace BankCalling {

@@ -8,8 +8,9 @@ namespace Zelinf {
 namespace BankCalling {
 namespace App {
 
-MainFrame::MainFrame() : wxFrame(nullptr, wxID_ANY, wxT("银行叫号模拟系统"), wxDefaultPosition,
-                                 wxSize(800, 600)) {
+MainFrame::MainFrame()
+        : wxFrame(nullptr, wxID_ANY, wxT("银行叫号模拟系统"), wxDefaultPosition,
+                  wxDefaultSize) {
     createMenus();
     SetBackgroundColour(wxColor("#39393A"));
 
@@ -21,6 +22,8 @@ MainFrame::MainFrame() : wxFrame(nullptr, wxID_ANY, wxT("银行叫号模拟系�
     SetSizer(sizer);
 
     Center();
+
+    bankRunner.setReceiver(dataPanel->GetEventHandler());
 }
 
 void MainFrame::createMenus() {

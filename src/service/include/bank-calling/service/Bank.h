@@ -92,6 +92,11 @@ private:
     RandomGen customerCountGen;
     RandomGen expectedServiceTimeGen;
 
+public:
+    void updateCustomerCountGen(double mean, double stddev);
+
+    void updateExpectedServiceTimeGen(double mean, double stddev);
+
 private:
     std::recursive_mutex lock;
 

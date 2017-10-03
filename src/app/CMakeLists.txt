@@ -11,6 +11,8 @@ add_executable(${PROJECT_NAME}
         src/gui/ControlPanel.cpp
         src/BankRunner.h
         src/BankRunner.cpp
+        src/gui/InfoUpdateEvent.h
+        src/gui/InfoUpdateEvent.cpp
         )
 target_link_libraries(${PROJECT_NAME}
         ${wxWidgets_LIBRARIES}

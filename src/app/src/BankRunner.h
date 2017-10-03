@@ -5,14 +5,18 @@
 #include <bank-calling/service/Bank.h>
 #include <thread>
 #include <mutex>
+#include <functional>
+#include <wx/event.h>
 
 namespace Zelinf {
 namespace BankCalling {
 namespace App {
 
 class BankRunner {
+private:
+    wxEvtHandler *receiver;
 public:
-    BankRunner();
+    explicit BankRunner(wxEvtHandler *receiver = nullptr);
 
     /**
      * Get a smart pointer to the underlying bank model.
@@ -43,14 +47,29 @@ public:
      * Resume the paused thread.
      */
     void resume();
-    
-private:
+
+    void withBank(std::function<void(std::shared_ptr<Zelinf::BankCalling::Service::Bank>)> callback);
+
     enum class RunnerState {
         RUNNING, PAUSED, STOPPED
     };
 
+    RunnerState getState() const {
+        return state;
+    }
+
+    void setCycleTime(int32_t cycleTime) {
+        this->cycleTime = cycleTime;
+    }
+
+    void setReceiver(wxEvtHandler *receiver) {
+        this->receiver = receiver;
+    }
+
 private:
     std::shared_ptr<Zelinf::BankCalling::Service::Bank> bank;
+
+    std::recursive_mutex bankLock;
 
     // cycle time in milliseconds
     std::atomic<int32_t> cycleTime;

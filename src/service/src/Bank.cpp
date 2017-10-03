@@ -20,7 +20,10 @@ void Bank::tick() {
 
     for (int32_t i = 0; i < customerCount; i++) {
         // generate a new customer
-        auto newCustomer = std::make_shared<Customer>(expectedServiceTimeGen.next());
+        Time expTime = expectedServiceTimeGen.next();
+        if (expTime < 1)
+            expTime = 1;
+        auto newCustomer = std::make_shared<Customer>(expTime);
         waitingQueue_.push_back(newCustomer);
     }
 
@@ -47,13 +50,13 @@ const std::deque<std::shared_ptr<Customer>> &Bank::waitingQueue() const {
     return waitingQueue_;
 }
 
-//void Bank::startTrans() {
-//    lock.lock();
-//}
-//
-//void Bank::commitTrans() {
-//    lock.unlock();
-//}
+void Bank::updateCustomerCountGen(double mean, double stddev) {
+    customerCountGen.set(mean, stddev);
+}
+
+void Bank::updateExpectedServiceTimeGen(double mean, double stddev) {
+    expectedServiceTimeGen.set(mean, stddev);
+}
 
 }
 }
