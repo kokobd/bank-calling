@@ -3,7 +3,7 @@ project(bank-calling)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(wxWidgets_ROOT_DIR libs/wxWidgets-3.0.3)
+set(wxWidgets_ROOT_DIR libs/wxWidgets)
 set(wxWidgets_CONFIGURATION mswu)
 find_package(wxWidgets REQUIRED
         COMPONENTS core base adv)
