@@ -12,7 +12,6 @@ MainFrame::MainFrame()
         : wxFrame(nullptr, wxID_ANY, wxT("银行叫号模拟系统"), wxDefaultPosition,
                   wxDefaultSize) {
     createMenus();
-    SetBackgroundColour(wxColor("#39393A"));
 
     auto *sizer = new wxBoxSizer(wxHORIZONTAL);
     dataPanel = new DataPanel(this, bankRunner);

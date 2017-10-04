@@ -1,0 +1,8 @@
+[submodule "libs/wxWidgets"]
+	path = libs/wxWidgets
+	url = https://github.com/wxWidgets/wxWidgets
+	branch = WX_3_0_3_BRANCH
+[submodule "libs/mingw-std-threads"]
+	path = libs/mingw-std-threads
+	url = https://github.com/zelinf/mingw-std-threads
+	branch = master
