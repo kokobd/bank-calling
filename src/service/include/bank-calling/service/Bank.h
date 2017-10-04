@@ -75,6 +75,12 @@ public:
         return static_cast<double>(totalWaitTime) / static_cast<double>(totalCustomers);
     }
 
+    /**
+     * Returns whether the bank is currently empty.
+     * True if both the waiting queue and all windows are empty.
+     */
+    bool empty() const;
+
 private:
     RandomGen customerCountGen;
     RandomGen expectedServiceTimeGen;
