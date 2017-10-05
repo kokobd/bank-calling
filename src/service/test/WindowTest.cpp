@@ -13,9 +13,10 @@ TEST_CASE("Window") {
     window.serve(c1);
     window.serve(c1);
     REQUIRE(18 == window.getLeftTime());
-    for (int i = 0; i < 18; i++) {
+    for (int i = 0; i < 17; i++) {
         window.serve(c1);
     }
+    window.serve(nullptr);
     REQUIRE(0 == window.getLeftTime());
     auto c2 = std::make_shared<BCS::Customer>(5);
     window.serve(c2);

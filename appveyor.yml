@@ -25,14 +25,14 @@ environment:
   APPVEYOR_RDP_PASSWORD: Ufida2017!
 
 platform:
-  - x86
+  - Win32
 
 configuration:
   - Release
 
 build:
   parallel: true
-  project: build/bank-calling.sln
+  project: build/ALL_BUILD.vcxproj
   verbosity: normal
 
 before_build:
@@ -44,11 +44,12 @@ before_build:
 # Tests
 #
 
+test_script:
+  - %APPVEYOR_BUILD_FOLDER%/Release/RUN_TESTS.exe
+
 #
 # After
 #
 
-on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-
-
+#on_finish:
+#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
