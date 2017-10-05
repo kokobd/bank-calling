@@ -46,7 +46,7 @@ before_build:
 
 test_script:
   - cd build
-    ctest
+  - ctest
 
 #
 # After
