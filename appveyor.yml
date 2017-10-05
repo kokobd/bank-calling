@@ -3,7 +3,7 @@
 # General Configuration
 # ---------------------------
 
-version: 0.1.{build}-{branch}
+version: 0.2.{build}-{branch}
 
 skip_tags: false
 skip_non_tags: false
@@ -69,9 +69,4 @@ deploy:
   on:
     branch:
       - master
-      - dev
-    appveyor_repo_tag: false        # deploy on tag push only
-
-
-on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+    appveyor_repo_tag: true
