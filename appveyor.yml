@@ -53,8 +53,8 @@ before_build:
 
 artifacts:
   - path: build/src/app-cli/Release/bank-calling-app.exe
-  - name: bank-calling-app
-  - type: File
+    name: bank-calling-app
+    type: File
 
 # Deployment
 deploy:
