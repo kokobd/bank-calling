@@ -22,7 +22,7 @@ init:
 
 clone_depth: 1
 environment:
-  APPVEYOR_RDP_PASSWORD: ufida2017
+  APPVEYOR_RDP_PASSWORD: Ufida2017!
 
 platform:
   - x86
