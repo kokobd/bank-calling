@@ -69,4 +69,5 @@ deploy:
   on:
     branch:
       - master
+      - v0.3.2
     appveyor_repo_tag: true
