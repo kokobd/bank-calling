@@ -21,19 +21,19 @@ void Bank::tick() {
     for (int32_t i = 0; i < customerCount; i++) {
         // generate a new customer
         Time expTime = expectedServiceTimeGen.next();
-        if (expTime < 1)
-            expTime = 1;
+        if (expTime < 2)
+            expTime = 2;
         auto newCustomer = std::make_shared<Customer>(expTime);
         waitingQueue_.push_back(newCustomer);
     }
 
     for (auto &p : windows_) {
         if (waitingQueue_.empty()) {
-            break;
-        }
-
-        if (p.second.serve(waitingQueue_.front())) {
-            waitingQueue_.pop_front();
+            p.second.serve(nullptr);
+        } else {
+            if (p.second.serve(waitingQueue_.front())) {
+                waitingQueue_.pop_front();
+            }
         }
     }
 
@@ -56,6 +56,14 @@ void Bank::updateCustomerCountGen(double mean, double stddev) {
 
 void Bank::updateExpectedServiceTimeGen(double mean, double stddev) {
     expectedServiceTimeGen.set(mean, stddev);
+}
+
+bool Bank::empty() const {
+    bool isEmpty = waitingQueue_.empty();
+    for (const auto &win : windows_) {
+        isEmpty = isEmpty && (win.second.getCurrentCustomer() == nullptr);
+    }
+    return isEmpty;
 }
 
 }

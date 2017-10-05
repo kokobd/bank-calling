@@ -7,7 +7,6 @@
 #include "Window.h"
 #include "RandomGen.h"
 #include <string>
-#include <mutex>
 
 namespace Zelinf {
 namespace BankCalling {
@@ -76,17 +75,11 @@ public:
         return static_cast<double>(totalWaitTime) / static_cast<double>(totalCustomers);
     }
 
-//    /**
-//     * Start a 'transaction'. Before calling 'commitTrans',
-//     * no other thread could return from startTrans.
-//     */
-//    void startTrans();
-//
-//    /**
-//     * Commit a 'transaction'. Other threads could then
-//     * return from 'startTrans'.
-//     */
-//    void commitTrans();
+    /**
+     * Returns whether the bank is currently empty.
+     * True if both the waiting queue and all windows are empty.
+     */
+    bool empty() const;
 
 private:
     RandomGen customerCountGen;
@@ -96,12 +89,6 @@ public:
     void updateCustomerCountGen(double mean, double stddev);
 
     void updateExpectedServiceTimeGen(double mean, double stddev);
-
-private:
-    std::recursive_mutex lock;
-
-public:
-    std::recursive_mutex &getLock() { return lock; }
 };
 
 }

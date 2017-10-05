@@ -18,11 +18,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC
         $<INSTALL_INTERFACE:include>
         private src)
 
-if (TargetsWindows)
-    target_link_libraries(${PROJECT_NAME}
-            mingw-std-threads)
-endif ()
-
 add_executable(${PROJECT_NAME}-test
         test/TestMain.cpp
         test/CustomerTest.cpp
