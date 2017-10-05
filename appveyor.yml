@@ -45,7 +45,7 @@ before_build:
 #
 
 test_script:
-  - %APPVEYOR_BUILD_FOLDER%/Release/RUN_TESTS.exe
+  - '%APPVEYOR_BUILD_FOLDER%/Release/RUN_TESTS.exe'
 
 #
 # After
