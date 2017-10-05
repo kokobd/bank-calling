@@ -44,8 +44,9 @@ before_build:
 # Tests
 #
 
-#test_script:
-#  - '%APPVEYOR_BUILD_FOLDER%/Release/RUN_TESTS.exe'
+test_script:
+  - cd build
+    ctest
 
 #
 # After
