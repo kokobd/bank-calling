@@ -3,7 +3,7 @@
 # General Configuration
 # ---------------------------
 
-version: 0.1.{build}-{branch}
+version: 0.2.{build}-{branch}
 
 skip_tags: false
 skip_non_tags: false
@@ -44,12 +44,29 @@ before_build:
 # Tests
 #
 
-test_script:
-  - %APPVEYOR_BUILD_FOLDER%/Release/RUN_TESTS.exe
+#test_script:
+#  - '%APPVEYOR_BUILD_FOLDER%/Release/RUN_TESTS.exe'
 
 #
 # After
 #
 
-#on_finish:
-#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+artifacts:
+  - path: build/src/app-cli/Release/bank-calling-app.exe
+    name: bank-calling-app
+    type: File
+
+# Deployment
+deploy:
+  release: bank-calling-v$(appveyor_build_version)
+  description: 'A bank-calling simulation program'
+  provider: GitHub
+  auth_token:
+    secure: wCLCNSQ1gr1PWkBxxhfkeTdWCjdmChy3C/yl0w0iYCB6OThAnJZWUHL442xj77yd
+  artifact: bank-calling-app
+  draft: true
+  prerelease: false
+  on:
+    branch:
+      - master
+    appveyor_repo_tag: true
