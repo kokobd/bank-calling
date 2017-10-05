@@ -51,6 +51,11 @@ before_build:
 # After
 #
 
+artifacts:
+  - path: build/src/app-cli/Release/bank-calling-app.exe
+  - name: bank-calling-app
+  - type: File
+
 # Deployment
 deploy:
   release: bank-calling-v$(appveyor_build_version)
@@ -58,7 +63,7 @@ deploy:
   provider: GitHub
   auth_token:
     secure: wCLCNSQ1gr1PWkBxxhfkeTdWCjdmChy3C/yl0w0iYCB6OThAnJZWUHL442xj77yd
-  artifact: '%APPVEYOR_BUILD_FOLDER%/build/src/app-cli/Release/bank-calling-app.exe'
+  artifact: bank-calling-app
   draft: true
   prerelease: false
   on:
