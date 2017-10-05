@@ -64,7 +64,7 @@ deploy:
   auth_token:
     secure: wCLCNSQ1gr1PWkBxxhfkeTdWCjdmChy3C/yl0w0iYCB6OThAnJZWUHL442xj77yd
   artifact: bank-calling-app
-  draft: true
+  draft: false
   prerelease: false
   on:
     branch:
