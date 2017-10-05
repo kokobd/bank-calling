@@ -1,0 +1,54 @@
+
+# ---------------------------
+# General Configuration
+# ---------------------------
+
+version: 0.1.{build}-{branch}
+
+skip_tags: false
+skip_non_tags: false
+
+max_jobs: 1
+
+# ---------------------------
+# Environment
+# ---------------------------
+
+image: Visual Studio 2015
+
+init:
+  - git config --global core.autocrlf true
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+clone_depth: 1
+environment:
+  APPVEYOR_RDP_PASSWORD: ufida2017
+
+platform:
+  - x86
+
+configuration:
+  - Release
+
+build:
+  parallel: true
+  project: build/bank-calling.sln
+  verbosity: normal
+
+before_build:
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 2015" ..
+
+#
+# Tests
+#
+
+#
+# After
+#
+
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+
