@@ -58,8 +58,8 @@ deploy:
   provider: GitHub
   auth_token:
     secure: wCLCNSQ1gr1PWkBxxhfkeTdWCjdmChy3C/yl0w0iYCB6OThAnJZWUHL442xj77yd
-  artifact: build/src/app-cli/Release/bank-calling-app.exe
-  draft: false
+  artifact: '%APPVEYOR_BUILD_FOLDER%/build/src/app-cli/Release/bank-calling-app.exe'
+  draft: true
   prerelease: false
   on:
     branch:
