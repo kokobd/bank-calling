@@ -42,7 +42,7 @@ before_build:
   - 'cmake -DCMAKE_GENERATOR_PLATFORM=%PLATFORM% ..'
 
 after_build:
-  - 'ren %APPVEYOR_BUILD_FORDER%\build\src\app-cli\Release bank-calling-app.exe bank-calling-app-%PLATFORM%.exe'
+  - 'ren %APPVEYOR_BUILD_FOLDER%\build\src\app-cli\Release bank-calling-app.exe bank-calling-app-%PLATFORM%.exe'
 
 #
 # Tests
