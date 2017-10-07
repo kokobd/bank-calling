@@ -4,7 +4,7 @@
 TEST_CASE("Bank") {
     using namespace Zelinf::BankCalling::Service;
 
-    Bank bank({L"A", L"B", L"C"});
+    Bank bank({"A", "B", "C"});
     bank.tick();
     bank.tick();
     bank.tick();

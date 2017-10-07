@@ -68,6 +68,7 @@ deploy:
   draft: false
   prerelease: false
   on:
+    branch: master
     appveyor_repo_tag: true
 
 #on_finish:
