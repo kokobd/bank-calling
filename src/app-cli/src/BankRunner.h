@@ -14,7 +14,7 @@ namespace App {
 
 class BankRunner {
 public:
-    BankRunner(std::initializer_list<std::wstring> initLabels, int period = 500);
+    BankRunner(std::initializer_list<std::string> initLabels, int period = 500);
 
     std::shared_ptr<Service::Bank> bank();
 

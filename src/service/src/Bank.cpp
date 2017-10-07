@@ -6,9 +6,9 @@ namespace Zelinf {
 namespace BankCalling {
 namespace Service {
 
-Bank::Bank(std::initializer_list<std::wstring> initialWindowLabels)
+Bank::Bank(std::initializer_list<std::string> initialWindowLabels)
         : totalWaitTime(0), totalCustomers(0) {
-    for (const std::wstring &label : initialWindowLabels) {
+    for (const std::string &label : initialWindowLabels) {
         windows_.insert({label, Window()});
     }
 
