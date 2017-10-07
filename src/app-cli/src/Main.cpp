@@ -20,7 +20,7 @@ int main() {
     std::wcout.sync_with_stdio(false);
     std::wcout.imbue(std::locale("en_US.utf8"));
 #else
-    _setmode(_fileno(stdout), _O_U16TEXT)
+    _setmode(_fileno(stdout), _O_U16TEXT);
 #endif
 
     int period;
