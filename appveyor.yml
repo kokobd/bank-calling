@@ -56,7 +56,7 @@ test_script:
 #
 
 artifacts:
-  - path: build/src/app-cli/Release/bank-calling-app.exe
+  - path: build/src/app-cli/Release/bank-calling-app-${platform}.exe
     name: bank-calling-app
     type: File
 
