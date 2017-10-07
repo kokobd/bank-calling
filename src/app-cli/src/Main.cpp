@@ -1,5 +1,13 @@
 #include <iostream>
+
+#ifndef _WIN32
+
 #include <locale>
+
+#else
+#include <io.h>
+#include <fcntl.h>
+#endif
 
 #include "Utils.h"
 #include "BankRunner.h"
@@ -8,9 +16,12 @@
 int main() {
     using namespace Zelinf::BankCalling::App;
 
-    std::locale::global(std::locale(""));
-    setlocale(LC_CTYPE, "");
-    std::wcout.imbue(std::locale(""));
+#ifndef _WIN32
+    std::wcout.sync_with_stdio(false);
+    std::wcout.imbue(std::locale("en_US.utf8"));
+#else
+    _setmode(_fileno(stdout), _O_U16TEXT)
+#endif
 
     int period;
     readVar(L"逻辑时间单位实际长度(ms)：", 1000, period);
