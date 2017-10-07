@@ -71,7 +71,7 @@ deploy:
   draft: false
   prerelease: false
   on:
-    branches:
+    branch:
       -/v\d\.\d\.\d/
     appveyor_repo_tag: true
 
