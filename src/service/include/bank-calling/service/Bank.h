@@ -19,7 +19,7 @@ namespace Service {
 class Bank {
 private:
     // (label, window)
-    std::map<std::wstring, Window> windows_;
+    std::map<std::string, Window> windows_;
 
     // back-in, front-out
     std::deque<std::shared_ptr<Customer>> waitingQueue_;
@@ -33,13 +33,13 @@ public:
      * Corresponding number of service windows will be created.
      * @param initialWindowLabels Initial labels of service windows.
      */
-    Bank(std::initializer_list<std::wstring> initialWindowLabels);
+    Bank(std::initializer_list<std::string> initialWindowLabels);
 
     /**
      * Get a view of the current service windows.
      * @return A map from label to window object.
      */
-    const std::map<std::wstring, Window> &windows() const { return windows_; }
+    const std::map<std::string, Window> &windows() const { return windows_; }
 
     /**
      * Get a view of the current waiting queue.

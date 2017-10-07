@@ -8,7 +8,7 @@ namespace Zelinf {
 namespace BankCalling {
 namespace App {
 
-BankRunner::BankRunner(std::initializer_list<std::wstring> initLabels, int period)
+BankRunner::BankRunner(std::initializer_list<std::string> initLabels, int period)
         : period(period) {
     bank_ = std::make_shared<Service::Bank>(initLabels);
 }
@@ -29,43 +29,43 @@ void BankRunner::run() {
 }
 
 void BankRunner::printCurrentInfo() const {
-    std::wcout << L"\n";
-    std::wcout << L"----------\n";
+    std::cout << "\n";
+    std::cout << "----------\n";
     printCurrentWindowsInfo();
     printCurrentQueueInfo();
-    std::flush(std::wcout);
+    std::flush(std::cout);
 }
 
 void BankRunner::printCurrentWindowsInfo() const {
-    std::wcout << L"窗口状态：\n";
+    std::cout << "Windows Status：\n";
     for (const auto &p : bank_->windows()) {
         if (p.second.getCurrentCustomer() != nullptr) {
-            std::wcout << L"窗口" << p.first;
-            std::wcout << L" <---> ";
-            std::wcout << L"顾客" << p.second.getCurrentCustomer()->getId()
-                       << L" (" << p.second.getLeftTime() << L"时间单位)\n";
+            std::cout << "Window " << p.first;
+            std::cout << " <---> ";
+            std::cout << "Customer " << p.second.getCurrentCustomer()->getId()
+                      << " (" << p.second.getLeftTime() << " time units left)\n";
         }
     }
 
 }
 
 void BankRunner::printCurrentQueueInfo() const {
-    std::wcout << L"等待队列状态：" << bank_->waitingQueue().size() << L"人\n";
+    std::cout << "Waiting Queue Status：" << bank_->waitingQueue().size() << " customers\n";
     for (const auto &cus : bank_->waitingQueue()) {
-        std::wcout << L"顾客" << cus->getId()
-                   << L"已等待" << cus->getWaitedTime()
-                   << L"时间单位\n";
+        std::cout << "Customer " << cus->getId()
+                  << " has waited for " << cus->getWaitedTime()
+                  << " time units\n";
     }
 }
 
 void BankRunner::printSummary() const {
-    std::wcout << L"----------\n";
-    std::wcout << L"等待平均时间：" << bank_->averageWaitingTime() << L"\n";
+    std::cout << "----------\n";
+    std::cout << "Average Waiting Time：" << bank_->averageWaitingTime() << "\n";
     for (const auto &p : bank_->windows()) {
-        std::wcout << L"窗口" << p.first
-                   << L"共服务" << p.second.getNumOfServed() << L"位顾客\n";
+        std::cout << "Window " << p.first
+                  << " has served " << p.second.getNumOfServed() << " customers in total.\n";
     }
-    std::flush(std::wcout);
+    std::flush(std::cout);
 }
 
 }

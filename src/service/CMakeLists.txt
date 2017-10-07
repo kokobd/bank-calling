@@ -27,3 +27,4 @@ add_executable(${PROJECT_NAME}-test
 target_link_libraries(${PROJECT_NAME}-test
         catch
         ${PROJECT_NAME})
+add_test(${PROJECT_NAME}-test ${PROJECT_NAME}-test)

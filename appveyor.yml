@@ -3,7 +3,7 @@
 # General Configuration
 # ---------------------------
 
-version: 0.2.{build}-{branch}
+version: 0.4.{build}
 
 skip_tags: false
 skip_non_tags: false
@@ -26,6 +26,7 @@ environment:
 
 platform:
   - Win32
+  - x64
 
 configuration:
   - Release
@@ -38,14 +39,14 @@ build:
 before_build:
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 14 2015" ..
+  - 'cmake -DCMAKE_GENERATOR_PLATFORM=%PLATFORM% ..'
 
 #
 # Tests
 #
 
-#test_script:
-#  - '%APPVEYOR_BUILD_FOLDER%/Release/RUN_TESTS.exe'
+test_script:
+  - ctest
 
 #
 # After
@@ -58,7 +59,7 @@ artifacts:
 
 # Deployment
 deploy:
-  release: bank-calling-v$(appveyor_build_version)
+  release: bank-calling-${branch}
   description: 'A bank-calling simulation program'
   provider: GitHub
   auth_token:
@@ -67,6 +68,8 @@ deploy:
   draft: false
   prerelease: false
   on:
-    branch:
-      - master
+    branch: master
     appveyor_repo_tag: true
+
+#on_finish:
+#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))

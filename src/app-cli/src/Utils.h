@@ -14,15 +14,15 @@ namespace App {
  * @param var A reference to save the input.
  */
 template<typename T>
-void readVar(const std::wstring &prompt, const T &defaultValue, T &var) {
-    std::wcout << prompt << L"(" << defaultValue << L") ";
-    std::wstring line;
-    std::getline(std::wcin, line);
+void readVar(const std::string &prompt, const T &defaultValue, T &var) {
+    std::cout << prompt << "(" << defaultValue << ") ";
+    std::string line;
+    std::getline(std::cin, line);
     if (line.empty()) {
         var = defaultValue;
         return;
     }
-    std::wistringstream is(line);
+    std::istringstream is(line);
     is >> var;
 }
 
