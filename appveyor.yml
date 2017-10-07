@@ -41,6 +41,9 @@ before_build:
   - cd build
   - 'cmake -DCMAKE_GENERATOR_PLATFORM=%PLATFORM% ..'
 
+after_build:
+  - 'ren src/app-cli/Release bank-calling-app.exe bank-calling-app-%PLATFORM%.exe'
+
 #
 # Tests
 #
@@ -68,7 +71,8 @@ deploy:
   draft: false
   prerelease: false
   on:
-    branch: master
+    branches:
+      -/v\d\.\d\.\d/
     appveyor_repo_tag: true
 
 #on_finish:
